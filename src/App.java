@@ -22,12 +22,16 @@ public class App {
             
             // Mine the blocks
             System.out.println("Trying to Mine block " + Integer.toString(i) + "...");
+            long startTime = System.currentTimeMillis();
             blockchain.get(i).mineBlock(difficulty);
+            long endTime = System.currentTimeMillis();
+            
             if (i == 0) {
                 System.out.println("Block " + Integer.toString(i) + " mined successfully!");
             } else {
-                long timeDifference = (blockchain.get(i).timeStamp - blockchain.get(i-1).timeStamp)/1000;
-                System.out.println("Block " + Integer.toString(i) + " mined successfully in " + timeDifference + " seconds.");
+                float miningTime = (endTime - startTime) / 1000f;
+                String formattedTime = String.format("%.3f", miningTime);
+                System.out.println("Block " + Integer.toString(i) + " mined successfully in " + formattedTime + " seconds.");
             }
         }
 
@@ -74,15 +78,14 @@ public class App {
                 System.out.println("Current timestamp is not greater than previous block's timestamp");
                 return false;
             }
-
             // Check if the block is mined correctly by comparing the hash with the target
             // If the hash does not start with the required number of zeros, the block is not mined correctly
-            if (currentBlock.hash.substring(0, difficulty).equals(hashTarget)) {
+            if (!currentBlock.hash.substring(0, difficulty).equals(new String(new char[difficulty]).replace('\0', '0'))) {
                 System.out.println("Block " + Integer.toString(i) + " not mined correctly");
                 return false;
-            }
-        }
+            }   
 
+        }
         return true;
     }
 }
