@@ -75,11 +75,11 @@ public class Transaction {
 
         // Gather transaction inputs (make sure they are unspent):
         for (TransactionInput i : inputs) {
-            i.UTXO = App.UTXOs.get(i.transactionOutputId);
+            i.UTXO = Blockchain.UTXOs.get(i.transactionOutputId);
         }
 
         // Check if transaction is valid:
-        if (getInputsValue() < App.minimumTransaction) {
+        if (getInputsValue() < Blockchain.minimumTransaction) {
             System.out.println("Transaction Inputs to small: " + getInputsValue());
             return false;
         }
@@ -92,13 +92,13 @@ public class Transaction {
 
         // Add outputs to Unspent list
         for (TransactionOutput o : outputs) {
-            App.UTXOs.put(o.id, o);
+            Blockchain.UTXOs.put(o.id, o);
         }
 
         // Remove transaction inputs from UTXO lists as spent:
         for (TransactionInput i : inputs) {
             if (i.UTXO == null) continue; // if Transaction can't be found skip it 
-            App.UTXOs.remove(i.UTXO.id);
+            Blockchain.UTXOs.remove(i.UTXO.id);
         }
 
         return true;

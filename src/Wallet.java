@@ -33,8 +33,8 @@ public class Wallet {
     // Calculate and return the balance of this wallet
     public float getBalance() {
         float total = 0;
-        for (String key : App.UTXOs.keySet()) {
-            TransactionOutput UTXO = App.UTXOs.get(key);
+        for (String key : Blockchain.UTXOs.keySet()) {
+            TransactionOutput UTXO = Blockchain.UTXOs.get(key);
             if (UTXO.isMine(publicKey)) { // if output belongs to me (if coins belong to me)
                 UTXOs.put(UTXO.id, UTXO); // add it to our list of unspent transactions.
                 total += UTXO.value;

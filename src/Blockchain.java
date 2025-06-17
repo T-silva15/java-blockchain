@@ -4,7 +4,7 @@ import java.security.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class App {    
+public class Blockchain {    
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
 	public static HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
 	

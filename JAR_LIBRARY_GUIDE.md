@@ -50,9 +50,14 @@ java -cp "/path/to/library.jar:src" App
 
 ### Multiple JARs
 ```bash
+# Compile 
+cd /home/tsilva/code/blockchain-java && javac -cp "lib/*:src" src/*.java
+
+# Run
+cd /home/tsilva/code/blockchain-java && java -cp "lib/*:src" Blockchain
 
 # Compile and Run
-cd /home/tsilva/code/blockchain-java && javac -cp "lib/*:src" src/*.java && cd /home/tsilva/code/blockchain-java && java -cp "lib/*:src" App
+cd /home/tsilva/code/blockchain-java && javac -cp "lib/*:src" src/*.java && java -cp "lib/*:src" Blockchain
 ```
 
 ## Method 3: Using Maven (Recommended for Large Projects)
